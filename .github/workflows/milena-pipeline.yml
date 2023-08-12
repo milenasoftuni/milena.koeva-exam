@@ -30,3 +30,14 @@ jobs:
     - run: npm run test:unit
     - name: Softuni username
       run: echo "milena.koeva"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Render
+        uses: johnbeynon/render-deploy-action@v.0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID}}
+          api-key: ${{ secrets.RENDER_API_KEY}}
+
